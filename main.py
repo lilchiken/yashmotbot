@@ -3,7 +3,7 @@ import time
 import os
 import glob
 
-session = vk_api.VkApi(token='99743fe599743fe599743fe55a99088ca19997499743fe5fbf3f7fc90127f058d1d1fcf')    #'5d87b3355a882c17ca88a0f358c3d8e8e6540c83506d1b09ec4e53744ce4390bbc78a945f85590406bbf7'
+session = vk_api.VkApi(token='...') # Здесь Ваш токен
 vk= session.get_api()
 
 class Post(): # Класс для инициализации запроса от вк ; zakrep = 0 - нет закрепа, 1 - есть закреп
@@ -29,9 +29,9 @@ class Posts(Post): # Класс для сохранения постов, пер
 
     def save_dict(self):
         self.dict[(self.group, self.id)] = [self.id, self.txt, self.img_url, self.url, 0, 0] # Последнии две переменные созданы для count likes
-        path = os.path.expanduser('/Users/ilia/PycharmProjects/testin/posts')
+        path = os.path.expanduser('/Users/ilia/Documents/GitHub/yashmotbot/posts')
         file_name = os.path.join(path, f'{self.group}_{self.id}')
-        if file_name not in sorted(glob.iglob(os.path.join('/Users/ilia/PycharmProjects/testin/posts','*'))):
+        if file_name not in sorted(glob.iglob(os.path.join('/Users/ilia/Documents/GitHub/yashmotbot/posts','*'))):
             with open (file_name, 'w') as file:
                 file.write(str(self.dict))
                 print('Новая запись') # if чтобы предотвратить перезапись
@@ -43,11 +43,11 @@ class Posts(Post): # Класс для сохранения постов, пер
     def update(self):
         k = 100 # устанавливаем сколько файлов будет хранить директория posts
         self.get_dict()
-        files_path = os.path.join('/Users/ilia/PycharmProjects/testin/posts', '*')
+        files_path = os.path.join('/Users/ilia/Documents/GitHub/yashmotbot/posts', '*')
         files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=False)
         if len(files) >= k:
             for i in range(len(files) - k):
-                os.remove(os.path.join('/Users/ilia/PycharmProjects/testin/posts', str(files[i])))
+                os.remove(os.path.join('/Users/ilia/Documents/GitHub/yashmotbot/posts', str(files[i])))
         self.save_dict()
         time.sleep(5)
 

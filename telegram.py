@@ -11,8 +11,8 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
 
 # Объект бота
-#proxy_url = 'http://proxy.server:3128'
-bot = Bot(token="5697696066:AAEVaAl5gHtvC9zJ4bQGOIw2rcRojKc954g", parse_mode="HTML")
+#proxy_url = 'http://proxy.server:3128' необходим при деплое на сервер
+bot = Bot(token="...", parse_mode="HTML") # Здесь Ваш токен
 # Диспетчер для бота
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.INFO)
 
 
 def queue_posts(): # отдает два списка: рандомный(0) и оригинальный(1)
-    files_path = os.path.join('/Users/ilia/PycharmProjects/testin/posts', '*')
+    files_path = os.path.join('/Users/ilia/Documents/GitHub/yashmotbot/posts', '*')
     files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True)
     posts_list = []
     origin_list = files.copy()
@@ -39,7 +39,7 @@ def queue_posts(): # отдает два списка: рандомный(0) и 
     return posts_list, origin_list
 
 def update_queue(posts_list, origin_list):
-    files_path = os.path.join('/Users/ilia/PycharmProjects/testin/posts', '*')
+    files_path = os.path.join('/Users/ilia/Documents/GitHub/yashmotbot/posts', '*')
     files = sorted(glob.iglob(files_path), key=os.path.getctime, reverse=True)
     posts_list.clear()
     for post in files:
